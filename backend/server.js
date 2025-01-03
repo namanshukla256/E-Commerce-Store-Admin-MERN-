@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000; // process.env.PORT is for deployment
 
+app.use(express.json()); // allows you to parse incoming JSON data
+
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
