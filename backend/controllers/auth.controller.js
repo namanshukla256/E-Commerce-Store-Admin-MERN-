@@ -145,15 +145,13 @@ export const logout =  async (req, res) => {
 };
 
 
-/* TO DO => Implement Get profile
-// export const getProfile = async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user.id).select("-password");
-//         res.json(user);
-//     } catch (error) {
-//         console.log("Error in getProfile controller", error.message);
-//         res.status(500).json({ message: "Server error", error: error.message });
-//     }
-// }
-
-*/
+export const getProfile = async (req, res) => {
+    try {
+        res.json(req.user);
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            error: error.message
+        });
+    }
+};
