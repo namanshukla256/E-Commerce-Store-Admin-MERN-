@@ -1,20 +1,20 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import SignUpPage from "./pages/SignUpPage";
-import LoginPage from "./pages/LoginPage";
-import AdminPage from "./pages/AdminPage";
-import CategoryPage from "./pages/CategoryPage";
+import HomePage from "../src/pages/HomePage.jsx";
+import SignUpPage from "../src/pages/SignUpPage.jsx";
+import LoginPage from "../src/pages/LoginPage.jsx";
+import AdminPage from "../src/pages/AdminPage.jsx";
+import CategoryPage from "../src/pages/CategoryPage.jsx";
 
-import Navbar from "./components/Navbar";
+import Navbar from "../src/components/Navbar.jsx";
 import { Toaster } from "react-hot-toast";
-import { useUserStore } from "./stores/useUserStore";
+import { useUserStore } from "./stores/useUserStore.js";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
-import CartPage from "./pages/CartPage";
-import { useCartStore } from "./stores/useCartStore";
-import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
-import PurchaseCancelPage from "./pages/PurchaseCancelPage";
+import CartPage from "./pages/CartPage.jsx";
+import { useCartStore } from "./stores/useCartStore.js";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage.jsx";
+import PurchaseCancelPage from "./pages/PurchaseCancelPage.jsx";
 
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();

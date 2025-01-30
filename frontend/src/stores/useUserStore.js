@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "../lib/axios";
+import axios from "../lib/axios.js";
 import { toast } from "react-hot-toast";
 
 export const useUserStore = create((set, get) => ({

@@ -2,10 +2,10 @@ import { BarChart, PlusCircle, ShoppingBasket } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import AnalyticsTab from "../components/AnalyticsTab";
-import CreateProductForm from "../components/CreateProductForm";
-import ProductsList from "../components/ProductsList";
-import { useProductStore } from "../stores/useProductStore";
+import AnalyticsTab from "../components/AnalyticsTab.jsx";
+import CreateProductForm from "../components/CreateProductForm.jsx";
+import ProductsList from "../components/ProductsList.jsx";
+import { useProductStore } from "../stores/useProductStore.js";
 
 const tabs = [
 	{ id: "create", label: "Create Product", icon: PlusCircle },

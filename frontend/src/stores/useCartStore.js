@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "../lib/axios";
+import axios from "../lib/axios.js";
 import { toast } from "react-hot-toast";
 
 export const useCartStore = create((set, get) => ({
@@ -32,16 +32,20 @@ export const useCartStore = create((set, get) => ({
 		get().calculateTotals();
 		toast.success("Coupon removed");
 	},
-
 	getCartItems: async () => {
-		try {
-			const res = await axios.get("/cart");
-			set({ cart: res.data });
-			get().calculateTotals();
-		} catch (error) {
-			set({ cart: [] });
-			toast.error(error.response.data.message || "An error occurred");
-		}
+  try {
+    const response = await axios.get('/cart');
+    if (response && response.data && Array.isArray(response.data)) {
+      set({ cart: response.data });
+      get().calculateTotals();
+    } else {
+      console.error('Invalid response:', response);
+      toast.error('Failed to fetch cart items');
+    }
+  } catch (error) {
+    console.error('Error fetching cart items:', error);
+    toast.error('Error fetching cart items');
+  }
 	},
 	clearCart: async () => {
 		set({ cart: [], coupon: null, total: 0, subtotal: 0 });
@@ -82,16 +86,18 @@ export const useCartStore = create((set, get) => ({
 		}));
 		get().calculateTotals();
 	},
-	calculateTotals: () => {
-		const { cart, coupon } = get();
-		const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-		let total = subtotal;
+calculateTotals: () => {
+  const { cart, coupon } = get();
+  if (!Array.isArray(cart)) {
+    console.error('Cart is not an array:', cart);
+    return;
+  }
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  let total = subtotal;
+  if (coupon) {
+    total -= coupon.discount;
+  }
+  set({ subtotal, total });
+},
 
-		if (coupon) {
-			const discount = subtotal * (coupon.discountPercentage / 100);
-			total = subtotal - discount;
-		}
-
-		set({ subtotal, total });
-	},
 }));
